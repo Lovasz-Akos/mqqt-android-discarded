@@ -1,3 +1,5 @@
+package com.qnszt.mqtt;
+
 public class AiotMqttOption {
     private String username = "";
     private String password = "";
