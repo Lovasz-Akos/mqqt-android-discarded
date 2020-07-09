@@ -36,7 +36,7 @@ import java.util.Date;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-
+//PROJECT SCRAPPED TUE TO YES
 public class MainActivity extends AppCompatActivity {
 
 
