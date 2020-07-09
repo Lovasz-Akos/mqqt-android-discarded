@@ -15,6 +15,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     final public String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
     final public String host = "tcp://192.168.43.1:1883";
-    //  mqtt://192.168.43.1:1883
 
 
     public static long miliTime = systemTime.getTime(); //stores current system time in milliseconds
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Obtain the MQTT connection information clientId, username, and password. */
+
 
 
 /*
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 */
 //remove comments to enable pupup dialogue on startup containing the current system time in milliseconds
 
-
+//get mqtt connection info, username, pw, clientID
         if (aiotMqttOption == null) {
             Log.e(TAG, "device info error");
         }else {
@@ -109,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
             passWord = aiotMqttOption.getPassword();
         }
 
-        /* Create an MqttConnectOptions object and configure the username and password. */
+        //create an mqtt option object and give username and pwd
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setUserName(userName);
         mqttConnectOptions.setPassword(passWord.toCharArray());
 
-        /* Create an MqttAndroidClient object and set a callback interface. */
+        // create an mqtt client object and set a callback
         mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), host, clientId);
         mqttAndroidClient.setCallback(new MqttCallback() {
             @Override
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Establish an MQTT connection */
+        // Connect to mqtt
         try {
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+//publish method, call this to publish anything, it takes care of stuff
     public void publishMessage(String payload) {
         try {
             if (mqttAndroidClient.isConnected() == false) {
@@ -187,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //subscriber method, call this to sub to anything, it takes care of stuff
     public void subscribeTopic(String topic) {
         try {
             mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
@@ -205,6 +206,10 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
+   
 
 
     @Override
