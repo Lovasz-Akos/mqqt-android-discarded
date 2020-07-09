@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     final private String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
     final private String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
-    final String host = "tcp://" + PRODUCTKEY + ".iot-as-mqtt.cn-shanghai.aliyuncs.com:443";
+    final String host = "mqtt://192.168.43.1:1883";
+    //  mqtt://192.168.43.1:1883
 
     private String clientId;
     private String userName;
