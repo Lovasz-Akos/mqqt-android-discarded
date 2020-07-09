@@ -14,6 +14,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -110,13 +111,17 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.i(TAG, "connect succeed");
-
+                    TextView tv = (TextView)findViewById(R.id.lbl_connectedDevices);
+                    tv.setText(TAG + "nagyon felcsatlakoztam :)");
                     subscribeTopic(SUB_TOPIC);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.i(TAG, "connect failed");
+
+                    TextView tv = (TextView)findViewById(R.id.lbl_connectedDevices);
+                    tv.setText(TAG + "nagyon nem csatlakoztam fel :(");
                 }
             });
 
