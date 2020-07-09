@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.android.service.*;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     final private String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
     final private String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
-    final String host = "mqtt://192.168.43.1:1883";
+    final String host = "test.mosquitto.org:1883";
     //  mqtt://192.168.43.1:1883
 
     private String clientId;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "connect failed");
 
                     TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
-                    tv.setText(TAG + " nagyon nem csatlakoztam fel :(" + exception.getMessage());
+                    tv.setText(TAG + " nagyon nem csatlakoztam fel :(" + exception.toString());
                 }
             });
 
