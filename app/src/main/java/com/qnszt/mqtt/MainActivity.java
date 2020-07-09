@@ -38,31 +38,19 @@ public class MainActivity extends AppCompatActivity {
     final private String DEVICENAME = "paho_android";
     final private String DEVICESECRET = "tLMT9QWD36U2SArglGqcHCDK9rK9****";
 
+
+    final private String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
+    final private String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
+
+    final String host = "tcp://" + PRODUCTKEY + ".iot-as-mqtt.cn-shanghai.aliyuncs.com:443";
+
     private String clientId;
     private String userName;
     private String passWord;
 
     AiotMqttOption aiotMqttOption = new AiotMqttOption().getMqttOption(PRODUCTKEY, DEVICENAME, DEVICESECRET);
 
-    protected void classname(){
-        /* Obtain the MQTT connection information clientId, username, and password. */
-
-        if (aiotMqttOption == null) {
-            Log.e(TAG, "device info error");
-        }else {
-            clientId = aiotMqttOption.getClientId();
-            userName = aiotMqttOption.getUsername();
-            passWord = aiotMqttOption.getPassword();
-        }
-
-        /* Create an MqttConnectOptions object and configure the username and password. */
-        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
-        mqttConnectOptions.setUserName(userName);
-        mqttConnectOptions.setPassword(passWord.toCharArray());
-
-    }
-
-
+    MqttAndroidClient mqttAndroidClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +67,108 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        /* Obtain the MQTT connection information clientId, username, and password. */
+
+        if (aiotMqttOption == null) {
+            Log.e(TAG, "device info error");
+        }else {
+            clientId = aiotMqttOption.getClientId();
+            userName = aiotMqttOption.getUsername();
+            passWord = aiotMqttOption.getPassword();
+        }
+
+        /* Create an MqttConnectOptions object and configure the username and password. */
+        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+        mqttConnectOptions.setUserName(userName);
+        mqttConnectOptions.setPassword(passWord.toCharArray());
+
+        /* Create an MqttAndroidClient object and set a callback interface. */
+        mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), host, clientId);
+        mqttAndroidClient.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+                Log.i(TAG, "connection lost");
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                Log.i(TAG, "topic: " + topic + ", msg: " + new String(message.getPayload()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+                Log.i(TAG, "msg delivered");
+            }
+        });
+
+        /* Establish an MQTT connection */
+        try {
+            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.i(TAG, "connect succeed");
+
+                    subscribeTopic(SUB_TOPIC);
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.i(TAG, "connect failed");
+                }
+            });
+
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
+
+
+    public void publishMessage(String payload) {
+        try {
+            if (mqttAndroidClient.isConnected() == false) {
+                mqttAndroidClient.connect();
+            }
+
+            MqttMessage message = new MqttMessage();
+            message.setPayload(payload.getBytes());
+            message.setQos(0);
+            mqttAndroidClient.publish(PUB_TOPIC, message,null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log. I (TAG, "publish succeed! ") ;
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.i(TAG, "publish failed!") ;
+                }
+            });
+        } catch (MqttException e) {
+            Log.e(TAG, e.toString());
+            e.printStackTrace();
+        }
+    }
+
+    public void subscribeTopic(String topic) {
+        try {
+            mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    Log.i(TAG, "subscribed succeed");
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    Log.i(TAG, "subscribed failed");
+                }
+            });
+
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
