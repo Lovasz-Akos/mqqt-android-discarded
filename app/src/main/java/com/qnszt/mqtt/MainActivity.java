@@ -33,7 +33,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class MainActivity extends AppCompatActivity {
 
 
-    private final String TAG = "Tibi nééézd! ott vagyok a képernyőn!!!";
+    private final String TAG = "MQTT QNSZT";
 
     final private String PRODUCTKEY = "a11xsrW****";
     final private String DEVICENAME = "paho_android";
