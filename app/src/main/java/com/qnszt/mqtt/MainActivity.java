@@ -37,20 +37,20 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MQTT QNSZT";
 
-    final private String PRODUCTKEY = "a11xsrW****";
-    final private String DEVICENAME = "paho_android";
-    final private String DEVICESECRET = "tLMT9QWD36U2SArglGqcHCDK9rK9****";
+    final public String PRODUCTKEY = "a11xsrW****";
+    final public String DEVICENAME = "paho_android";
+    final public String DEVICESECRET = "tLMT9QWD36U2SArglGqcHCDK9rK9****";
 
 
-    final private String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
-    final private String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
+    final public String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
+    final public String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
-    final String host = "test.mosquitto.org:1883";
+    final public String host = "test.mosquitto.org:1883";
     //  mqtt://192.168.43.1:1883
 
-    private String clientId;
-    private String userName;
-    private String passWord;
+    public String clientId;
+    public String userName;
+    public String passWord;
 
     AiotMqttOption aiotMqttOption = new AiotMqttOption().getMqttOption(PRODUCTKEY, DEVICENAME, DEVICESECRET);
 
