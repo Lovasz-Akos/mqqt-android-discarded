@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             mqttAndroidClient.publish(PUB_TOPIC, message,null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log. I (TAG, "publish succeed! ") ;
+                    Log.i(TAG, "publish succeed! ") ;
                 }
 
                 @Override
