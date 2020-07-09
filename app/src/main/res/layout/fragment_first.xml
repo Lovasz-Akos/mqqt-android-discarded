@@ -159,4 +159,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_checkConnection" />
 
+    <TextView
+        android:id="@+id/lbl_connectionStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nincs Kapcsolat"
+        app:layout_constraintBottom_toTopOf="@+id/btn_checkConnection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_connectedDevices" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
