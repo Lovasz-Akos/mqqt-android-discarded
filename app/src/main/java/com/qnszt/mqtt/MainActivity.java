@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.i(TAG, "connect succeed");
-                    TextView tv = (TextView)findViewById(R.id.lbl_connectedDevices);
-                    tv.setText(TAG + "nagyon felcsatlakoztam :)");
+                    TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
+                    tv.setText(TAG + " nagyon felcsatlakoztam :)");
                     subscribeTopic(SUB_TOPIC);
                 }
 
@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.i(TAG, "connect failed");
 
-                    TextView tv = (TextView)findViewById(R.id.lbl_connectedDevices);
-                    tv.setText(TAG + "nagyon nem csatlakoztam fel :(");
+                    TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
+                    tv.setText(TAG + " nagyon nem csatlakoztam fel :(" + exception.getMessage());
                 }
             });
 
