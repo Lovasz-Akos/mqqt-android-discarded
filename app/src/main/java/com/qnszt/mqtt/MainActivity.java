@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,6 +15,7 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -28,13 +30,18 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-
+//PROJECT SCRAPPED TUE TO YES
 public class MainActivity extends AppCompatActivity {
 
+
+
+    private static Date systemTime = Calendar.getInstance().getTime();
 
     private final String TAG = "MQTT QNSZT";
 
@@ -47,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
     final public String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
     final public String host = "tcp://192.168.43.1:1883";
-    //  mqtt://192.168.43.1:1883
+
+
+    public static long miliTime = systemTime.getTime(); //stores current system time in milliseconds
 
     public String clientId;
     public String userName;
@@ -61,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -75,10 +87,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Obtain the MQTT connection information clientId, username, and password. */
 
 
 
+/*
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setMessage(((Long) systemTime.getTime()).toString());
+        dlgAlert.setTitle("sysTime?");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+*/
+//remove comments to enable pupup dialogue on startup containing the current system time in milliseconds
+
+//get mqtt connection info, username, pw, clientID
         if (aiotMqttOption == null) {
             Log.e(TAG, "device info error");
         }else {
@@ -87,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
             passWord = aiotMqttOption.getPassword();
         }
 
-        /* Create an MqttConnectOptions object and configure the username and password. */
+        //create an mqtt option object and give username and pwd
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setUserName(userName);
         mqttConnectOptions.setPassword(passWord.toCharArray());
 
-        /* Create an MqttAndroidClient object and set a callback interface. */
+        // create an mqtt client object and set a callback
         mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), host, clientId);
         mqttAndroidClient.setCallback(new MqttCallback() {
             @Override
@@ -111,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Establish an MQTT connection */
+        // Connect to mqtt
         try {
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
@@ -127,8 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "connect failed");
 
                     TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
-                    tv.setText(TAG + " ||Nem csatlakoott fel :c||" + " ||Cause: " + exception.getCause()
-                            + " ||Message: " +exception.getMessage() + "    UserIDk meg ilyenek: " + userName + "  ||  " +  passWord + "  ||  " + clientId);
+                    tv.setText("Nincs interneted te fasz (vagy a szerver nem jo)");
                 }
             });
 
@@ -139,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+//publish method, call this to publish anything, it takes care of stuff
     public void publishMessage(String payload) {
         try {
             if (mqttAndroidClient.isConnected() == false) {
@@ -166,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //subscriber method, call this to sub to anything, it takes care of stuff
     public void subscribeTopic(String topic) {
         try {
             mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
@@ -183,6 +205,27 @@ public class MainActivity extends AppCompatActivity {
         } catch (MqttException e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    public void clickedCheckConnectionButton(){
+        final Button btn = (Button) findViewById(R.id.btn_checkConnection);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TIBI, IDE JÖHET A KÓDOD AMI AZ ELLENŐRZÉS GOMB LENYOMÁSÁRA FUT LE :)
+            }
+        });
+    }
+
+
+    public void clickedStartMeasrementButton(){
+        final Button btn = (Button) findViewById(R.id.btn_startMeasurement);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TIBI, IDE JÖHET A KÓDOD AMI A MÉRÉS INDÍTÁSA GOMB LENYOMÁSÁRA FUT LE :)
+            }
+        });
     }
 
 
