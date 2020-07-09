@@ -22,6 +22,7 @@ import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -45,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
     final public String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
     final public String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
-    final public String host = "test.mosquitto.org:1883";
+    final public String host = "tcp://broker.hivemq.com:1883";
     //  mqtt://192.168.43.1:1883
 
     public String clientId;
     public String userName;
     public String passWord;
+
+
 
     AiotMqttOption aiotMqttOption = new AiotMqttOption().getMqttOption(PRODUCTKEY, DEVICENAME, DEVICESECRET);
 
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         /* Obtain the MQTT connection information clientId, username, and password. */
+
+
 
         if (aiotMqttOption == null) {
             Log.e(TAG, "device info error");
@@ -122,11 +127,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "connect failed");
 
                     TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
-                    tv.setText(TAG + " nagyon nem csatlakoztam fel :(" + exception.toString());
+                    tv.setText(TAG + " ||Nem csatlakoott fel :c||" + " ||Cause: " + exception.getCause()
+                            + " ||Message: " +exception.getMessage() + "    UserIDk meg ilyenek: " + userName + "  ||  " +  passWord + "  ||  " + clientId);
                 }
             });
 
         } catch (MqttException e) {
+            TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
+            tv.setText("connection failed completely! (this is in the establish connection try's catch)");
             e.printStackTrace();
         }
     }
