@@ -56,34 +56,44 @@
         tools:text="99" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/btn_checkConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next"
+        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/static_lbl_connectedDevices" />
+        tools:text="Ellenőrzés" />
+
+    <Button
+        android:id="@+id/btn_startMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_checkConnection"
+        tools:text="Mérés Indítása" />
 
     <EditText
         android:id="@+id/txt_measurementName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_connectedDevices"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_connectedDevices" />
 
     <EditText
         android:id="@+id/num_measurementDuration"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
-        app:layout_constraintTop_toBottomOf="@+id/txt_measurementName"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_measurementName" />
 
     <RadioGroup
         android:id="@+id/radgrp_frequency"
