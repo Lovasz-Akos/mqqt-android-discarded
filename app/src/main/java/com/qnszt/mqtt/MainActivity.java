@@ -209,7 +209,24 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-   
+    public void clickedCheckConnectionButton(){
+        final Button btn = (Button) findViewById(R.id.btn_checkConnection);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TIBI, IDE JÖHET A KÓDOD AMI AZ ELLENŐRZÉS GOMB LENYOMÁSÁRA FUT LE :)
+            }
+        });
+    }
+
+
+    public void clickedStartMeasrementButton(){
+        final Button btn = (Button) findViewById(R.id.btn_startMeasurement);
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TIBI, IDE JÖHET A KÓDOD AMI A MÉRÉS INDÍTÁSA GOMB LENYOMÁSÁRA FUT LE :)
+            }
+        });
+    }
 
 
     @Override
