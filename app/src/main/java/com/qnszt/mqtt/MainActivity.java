@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     final public String PUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/update";
     final public String SUB_TOPIC = "/" + PRODUCTKEY + "/" + DEVICENAME + "/user/get";
 
-    final public String host = "tcp://broker.hivemq.com:1883";
+    final public String host = "tcp://192.168.43.1:1883";
     //  mqtt://192.168.43.1:1883
 
 
