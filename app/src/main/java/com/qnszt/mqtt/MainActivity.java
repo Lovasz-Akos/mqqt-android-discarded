@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -28,6 +29,8 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.math.BigInteger;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -35,6 +38,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
+    private static Date systemTime = Calendar.getInstance().getTime();
 
     private final String TAG = "MQTT QNSZT";
 
@@ -49,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     final public String host = "tcp://broker.hivemq.com:1883";
     //  mqtt://192.168.43.1:1883
 
+
+    public static long miliTime = systemTime.getTime(); //stores current system time in milliseconds
+
     public String clientId;
     public String userName;
     public String passWord;
@@ -61,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -77,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
 
         /* Obtain the MQTT connection information clientId, username, and password. */
 
+
+/*
+        AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(this);
+        dlgAlert.setMessage(((Long) systemTime.getTime()).toString());
+        dlgAlert.setTitle("sysTime?");
+        dlgAlert.setPositiveButton("OK", null);
+        dlgAlert.setCancelable(true);
+        dlgAlert.create().show();
+*/
+//remove comments to enable pupup dialogue on startup containing the current system time in milliseconds
 
 
         if (aiotMqttOption == null) {
@@ -127,8 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "connect failed");
 
                     TextView tv = (TextView)findViewById(R.id.lbl_connectionStatus);
-                    tv.setText(TAG + " ||Nem csatlakoott fel :c||" + " ||Cause: " + exception.getCause()
-                            + " ||Message: " +exception.getMessage() + "    UserIDk meg ilyenek: " + userName + "  ||  " +  passWord + "  ||  " + clientId);
+                    tv.setText("Nincs interneted te fasz (vagy a szerver nem jo)");
                 }
             });
 
