@@ -7,22 +7,113 @@
     tools:context=".FirstFragment">
 
     <TextView
-        android:id="@+id/textview_first"
+        android:id="@+id/static_lbl_connectedDevices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintBottom_toTopOf="@id/button_first"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Csatlakoztatott eszközök:" />
+
+    <TextView
+        android:id="@+id/static_lbl_measurementName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_connectedDevices"
+        tools:text="Mérés neve:" />
+
+    <TextView
+        android:id="@+id/static_lbl_measurementDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_measurementName"
+        tools:text="Mérés időtartama:" />
+
+    <TextView
+        android:id="@+id/static_lbl_measurementFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_measurementDuration"
+        tools:text="Frekvencia:" />
+
+    <TextView
+        android:id="@+id/lbl_connectedDevices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="99" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/btn_checkConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/next"
+        android:layout_marginBottom="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
+        tools:text="Ellenőrzés" />
+
+    <Button
+        android:id="@+id/btn_startMeasurement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_checkConnection"
+        tools:text="Mérés Indítása" />
+
+    <EditText
+        android:id="@+id/txt_measurementName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_connectedDevices" />
+
+    <EditText
+        android:id="@+id/num_measurementDuration"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
+        app:layout_constraintTop_toBottomOf="@+id/txt_measurementName" />
+
+    <RadioGroup
+        android:id="@+id/radgrp_frequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
+        app:layout_constraintTop_toBottomOf="@+id/num_measurementDuration">
+
+        <RadioButton
+            android:id="@+id/rad_measurementFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            tools:text="50Hz" />
+
+        <RadioButton
+            android:id="@+id/rad_measurementFrequency2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            tools:text="100Hz" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
