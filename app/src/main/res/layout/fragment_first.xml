@@ -12,68 +12,72 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:text="Csatlakoztatott eszközök:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Csatlakoztatott eszközök:" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/static_lbl_measurementName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
+        android:layout_marginStart="92dp"
         android:layout_marginTop="12dp"
+        android:text="Mérés neve:"
+        app:layout_constraintEnd_toEndOf="@+id/static_lbl_connectedDevices"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/static_lbl_connectedDevices"
-        tools:text="Mérés neve:" />
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_connectedDevices" />
 
     <TextView
         android:id="@+id/static_lbl_measurementDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="32dp"
+        android:text="Mérés időtartama:"
+        app:layout_constraintEnd_toEndOf="@+id/static_lbl_measurementName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/static_lbl_measurementName"
-        tools:text="Mérés időtartama:" />
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_measurementName" />
 
     <TextView
         android:id="@+id/static_lbl_measurementFrequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="28dp"
+        android:text="Frekvencia:"
+        app:layout_constraintEnd_toEndOf="@+id/static_lbl_measurementDuration"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/static_lbl_measurementDuration"
-        tools:text="Frekvencia:" />
+        app:layout_constraintTop_toBottomOf="@+id/static_lbl_measurementDuration" />
 
     <TextView
         android:id="@+id/lbl_connectedDevices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="99"
         app:layout_constraintStart_toEndOf="@+id/static_lbl_connectedDevices"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="99" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_checkConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
+        android:text="Ellenőrzés"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Ellenőrzés" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_startMeasurement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="120dp"
+        android:text="Mérés Indítása"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_checkConnection"
-        tools:text="Mérés Indítása" />
+        app:layout_constraintStart_toEndOf="@+id/btn_checkConnection" />
 
     <EditText
         android:id="@+id/txt_measurementName"
@@ -107,13 +111,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"
-            tools:text="50Hz" />
+            android:text="50Hz" />
 
         <RadioButton
             android:id="@+id/rad_measurementFrequency2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="false"
-            tools:text="100Hz" />
+            android:text="100Hz" />
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
