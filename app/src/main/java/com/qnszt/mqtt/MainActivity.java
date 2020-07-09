@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+
 import android.util.Log;
 import android.view.View;
 
@@ -32,7 +33,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class MainActivity extends AppCompatActivity {
 
 
-    private final String TAG = "AiotMqtt";
+    private final String TAG = "Tibi nééézd! ott vagyok a képernyőn!!!";
 
     final private String PRODUCTKEY = "a11xsrW****";
     final private String DEVICENAME = "paho_android";
