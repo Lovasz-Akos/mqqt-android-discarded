@@ -1,5 +1,10 @@
 package com.qnszt.mqtt;
 
+import java.math.BigInteger;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 public class AiotMqttOption {
     private String username = "";
     private String password = "";

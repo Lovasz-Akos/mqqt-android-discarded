@@ -8,12 +8,61 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import java.math.BigInteger;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+
 public class MainActivity extends AppCompatActivity {
+
+
+    private final String TAG = "AiotMqtt";
+
+    final private String PRODUCTKEY = "a11xsrW****";
+    final private String DEVICENAME = "paho_android";
+    final private String DEVICESECRET = "tLMT9QWD36U2SArglGqcHCDK9rK9****";
+
+    private String clientId;
+    private String userName;
+    private String passWord;
+
+    AiotMqttOption aiotMqttOption = new AiotMqttOption().getMqttOption(PRODUCTKEY, DEVICENAME, DEVICESECRET);
+
+    protected void classname(){
+        /* Obtain the MQTT connection information clientId, username, and password. */
+
+        if (aiotMqttOption == null) {
+            Log.e(TAG, "device info error");
+        }else {
+            clientId = aiotMqttOption.getClientId();
+            userName = aiotMqttOption.getUsername();
+            passWord = aiotMqttOption.getPassword();
+        }
+
+        /* Create an MqttConnectOptions object and configure the username and password. */
+        MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
+        mqttConnectOptions.setUserName(userName);
+        mqttConnectOptions.setPassword(passWord.toCharArray());
+
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
