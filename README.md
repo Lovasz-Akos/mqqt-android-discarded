@@ -1,0 +1,2 @@
+# MQTT Android
+Discarded project
